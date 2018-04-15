@@ -1,0 +1,19 @@
+{
+    "name": "oom/luya-module-apiauth",
+    "type": "luya-extension",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "oom",
+            "email": "baqianxin@163.com"
+        }
+    ],
+    "require": {
+        "luyadev/luya-core": "~1.0.0",
+        "luyadev/luya-module-admin": "~1.1.0"
+
+    },
+    "extra": {
+
+    }
+}
