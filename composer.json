@@ -2,6 +2,7 @@
     "name": "oom/luya-module-apiauth",
     "type": "luya-extension",
     "minimum-stability": "stable",
+    "licence":"MIT",
     "authors": [
         {
             "name": "oom",
@@ -12,9 +13,6 @@
         "luyadev/luya-core": "~1.0.0",
         "luyadev/luya-module-admin": "~1.1.0"
 
-    },
-    "require-dev": {
-        "yiisoft/yii2-gii" : "~2.0.0"
     },
     "extra": {
 
