@@ -14,8 +14,33 @@ return [
             'class' => 'app\modules\api\frontend\Module',
             'useAppViewPath' => true, // When enabled the views will be looked up in the @app/views folder, otherwise the views shipped with the module will be used.
         ],
-        'apiadmin' => 'app\modules\api\admin\Module',
+        'apiv1' => 'app\modules\apiv1\admin\Module',
         // ...
     ],
 ];
+```
+
+Update components
+```php
+    'components' => [
+
+        //...
+        'user' => [
+            'identityClass' => 'app\components\models\ApiAuthUser',
+            'enableAutoLogin' => true,
+            'enableSession' => false,
+            'loginUrl' => null,
+        ],
+        'urlManager' => [
+            'rules' => [
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'addressbookadmin/user'],
+            ],
+        ],
+        'response' => [
+            'format' => yii\web\Response::FORMAT_RAW,
+            'charset' => 'UTF-8',
+            // ...
+        ],
+        // ...   
+    ]   
 ```

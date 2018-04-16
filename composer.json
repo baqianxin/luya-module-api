@@ -13,6 +13,9 @@
         "luyadev/luya-module-admin": "~1.1.0"
 
     },
+    "require-dev": {
+        "yiisoft/yii2-gii" : "~2.0.0"
+    },
     "extra": {
 
     }
