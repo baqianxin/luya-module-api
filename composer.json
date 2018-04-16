@@ -14,6 +14,11 @@
         "luyadev/luya-module-admin": "~1.1.0"
 
     },
+    "autoload":{
+        "psr-4":{
+            "luya\\apiauth":"src/"
+        }
+    },
     "extra": {
 
     }

@@ -26,14 +26,14 @@ Update components
 
         //...
         'user' => [
-            'identityClass' => 'app\components\models\ApiAuthUser',
+            'identityClass' => 'luya\apiauth\models\ApiAuthUser',
             'enableAutoLogin' => true,
             'enableSession' => false,
             'loginUrl' => null,
         ],
         'urlManager' => [
             'rules' => [
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'addressbookadmin/user'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/user'],
             ],
         ],
         'response' => [
