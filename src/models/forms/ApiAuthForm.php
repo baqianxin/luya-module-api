@@ -1,10 +1,10 @@
 <?php
 
-namespace luya\apiauth\models;
+namespace luya\apiauth\models\forms;
 
-use Yii;
+
 use yii\base\Model;
-use luya\apiauth\models\ApiAuthUser;
+use luya\apiauth\models\APIAuthUser;
 
 /**
  * Login form
@@ -15,7 +15,7 @@ class ApiAuthForm extends Model
     public $app_secret;
 
     /**
-     * @var $_user ApiAuthUser
+     * @var $_user APIAuthUser
      */
     private $_user;
 
@@ -36,18 +36,19 @@ class ApiAuthForm extends Model
     {
         return [
             [['app_key', 'app_secret'], 'required'],
-            ['app_secret', 'validateSecret'],
+            ['app_secret', 'validateAppSecret'],
         ];
     }
 
     /**
      * 自定义的密码认证方法
+     * @param $attribute
      */
-    public function validateSecret($attribute, $params)
+    public function validateAppSecret($attribute)
     {
         if (!$this->hasErrors()) {
             $this->_user = $this->getUser();
-            if (!$this->_user || !$this->_user->validatePassword($this->app_secret)) {
+            if (!$this->_user || !$this->_user->validateAppSecret($this->app_secret)) {
                 $this->addError($attribute, 'APPKEY或APPSECRET错误.');
             }
         }
@@ -95,7 +96,7 @@ class ApiAuthForm extends Model
 
     /**
      * 登录校验成功后，为用户生成新的token
-     * 如果token失效，则重新生成token
+     * 如果token时间失效，则重新生成token
      * @throws \yii\base\Exception
      */
     public function onGenerateApiToken()

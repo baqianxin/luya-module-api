@@ -2,35 +2,40 @@
 
 namespace luya\apiauth\models;
 
+use luya\apiauth\admin\aws\ChangeSecretActiveWindow;
+use luya\admin\ngrest\base\NgRestModel;
 use Yii;
 use yii\base\Exception;
-use yii\web\Link;
-use yii\helpers\Url;
-use yii\db\ActiveRecord;
-use yii\web\IdentityInterface;
 use yii\filters\RateLimitInterface;
-use yii\behaviors\TimestampBehavior;
+use yii\web\IdentityInterface;
 
 /**
- * This is the model class for table "api_auth_user".
+ * Apiauth User.
  *
- * @property int $id
- * @property string $username
- * @property string $auth_key
- * @property string $password_hash
- * @property string $password_reset_token
- * @property int $allowance 剩余的允许的请求数量
- * @property int $allowance_updated_at 有效期UNIX时间戳数
+ * File has been created with `crud/create` command.
+ *
+ * @property integer $id
  * @property string $email
+ * @property string $username
+ * @property string $app_key
+ * @property string $api_token
+ * @property string $app_secret
+ * @property string $app_secret_reset_token
+ * @property integer $allowance
+ * @property integer $allowance_updated_at
  * @property int $status
- * @property int $created_at
- * @property int $updated_at
- * @property string api_token
+ * @property integer $created_at
+ * @property integer $updated_at
  */
-class ApiAuthUser extends ActiveRecord implements IdentityInterface, RateLimitInterface
+class APIAuthUser extends NgRestModel implements IdentityInterface, RateLimitInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
+
+    /**
+     * @inheritdoc
+     */
+//    public $i18n = ['email', 'username', 'app_key', 'api_token', 'app_secret', 'app_secret_reset_token'];
 
     /**
      * @inheritdoc
@@ -43,10 +48,29 @@ class ApiAuthUser extends ActiveRecord implements IdentityInterface, RateLimitIn
     /**
      * @inheritdoc
      */
-    public function behaviors()
+    public static function ngRestApiEndpoint()
+    {
+        return 'api-auth-user';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
     {
         return [
-            TimestampBehavior::className(),
+            'id' => Yii::t('apiadmin', 'ID'),
+            'email' => Yii::t('apiadmin', 'Email'),
+            'username' => Yii::t('apiadmin', 'Username'),
+            'app_key' => Yii::t('apiadmin', 'App Key'),
+            'api_token' => Yii::t('apiadmin', 'Api Token'),
+            'app_secret' => Yii::t('app', 'App Secret'),
+            'app_secret_reset_token' => Yii::t('app', 'App Secret Reset Token'),
+            'allowance' => Yii::t('app', 'Allowance'),
+            'allowance_updated_at' => Yii::t('app', 'Allowance Updated At'),
+            'status' => Yii::t('app', 'Status'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
 
@@ -56,56 +80,77 @@ class ApiAuthUser extends ActiveRecord implements IdentityInterface, RateLimitIn
     public function rules()
     {
         return [
-            [['username', 'app_key', 'api_token', 'app_secret', 'email', 'created_at', 'updated_at'], 'required'],
+            [['email', 'username', 'app_key', 'api_token', 'app_secret', 'created_at', 'updated_at'], 'required'],
             [['allowance', 'allowance_updated_at', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['email', 'api_token', 'app_secret', 'app_secret_reset_token'], 'string', 'max' => 255],
             [['username', 'app_key'], 'string', 'max' => 32],
-            [['app_secret', 'api_token', 'app_secret_reset_token', 'email'], 'string', 'max' => 255],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
+    public function genericSearchFields()
+    {
+        return ['email', 'username', 'app_key', 'api_token', 'app_secret', 'app_secret_reset_token'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function ngRestAttributeTypes()
     {
         return [
-            'id' => 'ID',
-            'email' => 'Email',
-            'username' => 'Username',
-            'app_key' => 'Auth Key',
-            'api_token' => 'Api Token',
-            'app_secret' => 'APP Secret',
-            'app_secret_reset_token' => 'APP Secret Reset Token',
-            'allowance' => 'Allowance',
-            'allowance_updated_at' => 'Allowance Updated At',
-            'status' => 'Status',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'email' => 'text',
+            'username' => 'text',
+            'app_key' => 'text',
+            'api_token' => 'text',
+            'app_secret' => 'text',
+            'app_secret_reset_token' => 'text',
+            'allowance' => 'number',
+            'allowance_updated_at' => 'number',
+            'status' => ['selectArray', 'data' => [self::STATUS_DELETED => '禁用', self::STATUS_ACTIVE => '启用']],
+            'created_at' => 'number',
+            'updated_at' => 'number',
         ];
     }
 
     /**
-     * @return array
-     * 可以屏蔽掉一些敏感字段
+     * @inheritdoc
      */
-    public function fields()
+    public function ngRestScopes()
     {
-        $fields = parent::fields();
-        unset($fields['app_key'], $fields['app_secret'], $fields['app_secret_reset_token']);
-        return $fields;
+        return [
+            [
+                'list',
+                [
+                    'email',
+                    'username',
+                    'app_key',
+                    'allowance',
+                    'updated_at'
+                ]
+            ],
+            [
+                ['create', 'update'],
+                [
+                    'email',
+                    'username',
+                    'allowance',
+                    'allowance_updated_at',
+                    'status',
+                ]
+            ],
+            ['delete', true],
+        ];
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * The default implementation returns the names of the relations that have been populated into this record.
-     * @return array
-     */
-    public function extraFields()
+    public function ngRestActiveWindows()
     {
-        return ['status'];
+        return [
+            ['class' => ChangeSecretActiveWindow::className(), 'label' => Yii::t('apiadmin','Change Secret'), 'icon' => 'poll'],
+        ];
     }
-
 
     /**
      * @param $app_secret
@@ -115,7 +160,6 @@ class ApiAuthUser extends ActiveRecord implements IdentityInterface, RateLimitIn
     public function validateAppSecret($app_secret)
     {
         return $this->app_secret === $app_secret;
-
     }
 
     /**
@@ -226,9 +270,10 @@ class ApiAuthUser extends ActiveRecord implements IdentityInterface, RateLimitIn
      * 生成密码hash（APP_SECRET）
      * @throws Exception
      */
-    public function generatePasswordHash()
+    public function generateAppSecret()
     {
-        $this->app_secret = Yii::$app->security->generateRandomString();
+        $app_secret = Yii::$app->security->generateRandomString();
+        $this->app_secret = strtolower(str_replace(['-', '_'], 'a', $app_secret));
     }
 
     /**
@@ -246,16 +291,7 @@ class ApiAuthUser extends ActiveRecord implements IdentityInterface, RateLimitIn
      */
     public function generateApiToken()
     {
-        $this->api_token = Yii::$app->security->generateRandomString() . '_' . time();
-    }
-
-    /**
-     * @param $app_secret
-     * @return bool
-     */
-    public function validatePassword($app_secret)
-    {
-        return $this->app_secret === $app_secret;
+        $this->api_token = Yii::$app->security->hashData(Yii::$app->security->generateRandomString(16), $this->app_secret). '_' . time();
     }
 
     /**
@@ -287,7 +323,7 @@ class ApiAuthUser extends ActiveRecord implements IdentityInterface, RateLimitIn
      */
     public function getAuthKey()
     {
-        // TODO: Implement getAuthKey() method.
+        return $this->app_key;
     }
 
     /**
@@ -300,6 +336,15 @@ class ApiAuthUser extends ActiveRecord implements IdentityInterface, RateLimitIn
      */
     public function validateAuthKey($authKey)
     {
-        // TODO: Implement validateAuthKey() method.
+        return $this->app_key === $authKey;
+    }
+
+    /**
+     * @return bool 是否开启Token有效期验证
+     */
+    public static function validateTokenExpire()
+    {
+        $expire = Yii::$app->params['user.apiTokenExpire'];
+        return $expire > 0;
     }
 }

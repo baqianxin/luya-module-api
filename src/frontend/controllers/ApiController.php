@@ -6,7 +6,7 @@
  * Time: 10:37
  */
 
-namespace luya\apiauth\controllers;
+namespace luya\apiauth\frontend\controllers;
 
 use Yii;
 use yii\helpers\ArrayHelper;
