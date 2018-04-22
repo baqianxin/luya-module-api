@@ -21,5 +21,12 @@
     },
     "extra": {
 
+    },
+    "config": {
+        "preferred-install": "dist",
+        "github-protocols": ["https","http"],
+        "github-oauth": {
+            "github.com": "5d972dad7835c00cc5e73d56a558609629e873a9"
+        }
     }
 }
