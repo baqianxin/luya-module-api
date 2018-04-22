@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\apiauth\frontend;
+namespace oom\api\frontend;
 
 /**
  * Api Admin Module.

@@ -1,10 +1,10 @@
 <?php
 
-namespace luya\apiauth\models\forms;
+namespace oom\api\models\forms;
 
 
 use yii\base\Model;
-use luya\apiauth\models\APIAuthUser;
+use oom\api\models\APIAuthUser;
 
 /**
  * Login form

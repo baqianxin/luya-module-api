@@ -6,7 +6,7 @@
  * Time: 9:38
  */
 
-namespace luya\apiauth\frontend\controllers;
+namespace oom\api\frontend\controllers;
 
 class UserController extends ApiController
 {

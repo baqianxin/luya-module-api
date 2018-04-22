@@ -6,12 +6,12 @@
  * Time: 16:45
  */
 
-namespace luya\apiauth\frontend\controllers;
+namespace oom\api\frontend\controllers;
 
 
-use luya\apiauth\response\JSONResult;
-use luya\apiauth\models\APIAuthUser;
-use luya\apiauth\models\forms\ApiAuthForm;
+use oom\api\response\JSONResult;
+use oom\api\models\APIAuthUser;
+use oom\api\models\forms\ApiAuthForm;
 use Yii;
 use yii\helpers\Json;
 use yii\web\IdentityInterface;

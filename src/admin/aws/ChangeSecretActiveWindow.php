@@ -1,8 +1,8 @@
 <?php
 
-namespace luya\apiauth\admin\aws;
+namespace oom\api\admin\aws;
 
-use luya\apiauth\models\APIAuthUser;
+use oom\api\models\APIAuthUser;
 use luya\admin\ngrest\base\ActiveWindow;
 
 /**

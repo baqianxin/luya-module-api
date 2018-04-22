@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\apiauth\admin\controllers;
+namespace oom\api\admin\controllers;
 
 use luya\admin\ngrest\base\Controller;
 
@@ -14,7 +14,7 @@ class ApiAuthUserController extends Controller
     /**
      * @var string The path to the model which is the provider for the rules and fields.
      */
-    public $modelClass = 'luya\apiauth\models\APIAuthUser';
+    public $modelClass = 'oom\api\models\APIAuthUser';
 
     /**
      * @param bool $inline

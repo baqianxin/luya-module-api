@@ -6,7 +6,7 @@
  * Time: 10:44
  */
 
-namespace luya\apiauth\utils;
+namespace oom\api\utils;
 
 use yii\filters\auth\AuthMethod;
 

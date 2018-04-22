@@ -1,8 +1,8 @@
 <?php
 
-namespace luya\apiauth\models;
+namespace oom\api\models;
 
-use luya\apiauth\admin\aws\ChangeSecretActiveWindow;
+use oom\api\admin\aws\ChangeSecretActiveWindow;
 use luya\admin\ngrest\base\NgRestModel;
 use Yii;
 use yii\base\Exception;

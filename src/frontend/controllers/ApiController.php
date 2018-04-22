@@ -6,13 +6,13 @@
  * Time: 10:37
  */
 
-namespace luya\apiauth\frontend\controllers;
+namespace oom\api\frontend\controllers;
 
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\Response;
-use luya\apiauth\utils\ApiParamAuth;
+use oom\api\utils\ApiParamAuth;
 
 class ApiController extends Controller
 {

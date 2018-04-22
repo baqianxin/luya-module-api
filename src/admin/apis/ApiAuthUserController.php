@@ -1,8 +1,8 @@
 <?php
 
-namespace luya\apiauth\admin\apis;
+namespace oom\api\admin\apis;
 
-use luya\apiauth\models\APIAuthUser;
+use oom\api\models\APIAuthUser;
 use luya\admin\ngrest\base\Api;
 use luya\helpers\Url;
 use Yii;
@@ -18,7 +18,7 @@ class ApiAuthUserController extends Api
     /**
      * @var string The path to the model which is the provider for the rules and fields.
      */
-    public $modelClass = 'luya\apiauth\models\APIAuthUser';
+    public $modelClass = 'oom\api\models\APIAuthUser';
 
 
     public function actions()

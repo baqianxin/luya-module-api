@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\apiauth\admin;
+namespace oom\api\admin;
 
 use luya\admin\components\AdminMenuBuilder;
 
@@ -16,7 +16,7 @@ class Module extends \luya\admin\base\Module
 {
 
     public $apis = [
-        'api-auth-user' => 'luya\apiauth\admin\apis\ApiAuthUserController',
+        'api-auth-user' => 'oom\api\admin\apis\ApiAuthUserController',
     ];
 
     public function getMenu()

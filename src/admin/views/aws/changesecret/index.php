@@ -7,7 +7,7 @@
  * @var $model NgRestModel
  */
 
-use luya\apiauth\admin\Module;
+use oom\api\admin\Module;
 use luya\admin\ngrest\base\ActiveWindowView;
 use luya\admin\ngrest\base\NgRestModel;
 

@@ -6,7 +6,7 @@
  * Time: 17:38
  */
 
-namespace luya\apiauth\response;
+namespace oom\api\response;
 
 use yii\base\Component;
 

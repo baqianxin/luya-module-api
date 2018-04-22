@@ -40,3 +40,8 @@ Update components
         // ...   
     ]   
 ```
+
+## Example 
+First: Insert the test user:`http://your.domain/api/sign/signup-test`
+Second:Request(post) the `http://your.domain/api/sign/token` with  params 'app_key'、'app_secret' to get the `'access token'`
+Test Api: `http://your.domain/api/user/rules?token='access-token'`
