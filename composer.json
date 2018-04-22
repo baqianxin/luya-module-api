@@ -1,6 +1,6 @@
 {
     "name": "oom/luya-module-apiauth",
-    "type": "luya-extension",
+    "type": "luya-module",
     "minimum-stability": "stable",
     "license":"MIT",
     "authors": [
