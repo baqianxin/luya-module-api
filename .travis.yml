@@ -1,4 +1,4 @@
-laguage: php
+language: php
 
 php:
   - 7.1.9
