@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -10,11 +9,11 @@
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
 >
-    <testsuites>
-        <testsuite name="Package Test Suite">
-            <directory>./tests</directory>
-        </testsuite>
-    </testsuites>
+	<testsuites>
+		<testsuite name="Package Test Suite">
+			<directory>./tests</directory>
+		</testsuite>
+	</testsuites>
 	<filter>
 		<blacklist>
 			<directory>./vendor</directory>
@@ -22,8 +21,8 @@
 		</blacklist>
 	</filter>
 	<php>
-        <const name="DB_DSN" value="mysql:host=localhost;dbname=luya_env_phpunit" />
-        <const name="DB_USER" value="" />
-        <const name="DB_PASS" value="" />
-    </php>
+		<const name="DB_DSN" value="mysql:host=localhost;dbname=luya_env_phpunit" />
+		<const name="DB_USER" value="" />
+		<const name="DB_PASS" value="" />
+	</php>
 </phpunit>
