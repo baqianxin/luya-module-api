@@ -1,5 +1,6 @@
-# Api Module
- 
+# Api Module 
+<img src="https://travis-ci.org/baqianxin/luya-module-api.svg?branch=master" alt="build:passed">
+
 File has been created with `module/create` command. 
  
 ## Installation
