@@ -12,10 +12,10 @@ return [
     'modules' => [
         // ...
         'api' => [
-            'class' => 'app\modules\api\frontend\Module',
+            'class' => 'oom\api\frontend\Module',
             'useAppViewPath' => true, // When enabled the views will be looked up in the @app/views folder, otherwise the views shipped with the module will be used.
         ],
-        'apiadmin' => 'app\modules\apiv1\admin\Module',
+        'apiadmin' => 'oom\api\admin\Module',
         // ...
     ],
 ];
@@ -27,7 +27,7 @@ Update components
 
         //...
         'user' => [
-            'identityClass' => 'luya\apiauth\models\APIAuthUser',
+            'identityClass' => 'oom\api\models\APIAuthUser',
             'enableAutoLogin' => true,
             'enableSession' => false,
             'loginUrl' => null,
