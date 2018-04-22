@@ -1,5 +1,8 @@
 laguage: php
 
+php:
+  - 7.1.9
+  - nightly
 
 sudo: false
 
