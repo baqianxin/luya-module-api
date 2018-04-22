@@ -43,5 +43,9 @@ Update components
 
 ## Example 
 * First: Insert the test user:`http://your.domain/api/sign/signup-test`
+
 * Second:Request(post) the `http://your.domain/api/sign/token` with  params 'app_key'、'app_secret' to get the `'access token'`
+![Step 2](./step-2.png)
+
 * Test Api: `http://your.domain/api/user/rules?token='access-token'`
+![Step 3](./step-3.png)
