@@ -8,6 +8,7 @@ sudo: false
 
 install:
   - travis_retry composer self-update && composer --version
+  - travis_retry composer config -g github-oauth.github.com 5d972dad7835c00cc5e73d56a558609629e873a9
   - travis_retry composer global require "fxp/composer-asset-plugin:~1.3"
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - travis_retry composer install --prefer-dist --no-interaction
