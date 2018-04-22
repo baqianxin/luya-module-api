@@ -49,3 +49,6 @@ Update components
 
 * Test Api: `http://your.domain/api/user/rules?token='access-token'`
 ![Step 3](./step-3.png)
+
+# Usage
+* extend the ApiController
