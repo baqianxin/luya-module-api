@@ -9,14 +9,15 @@
 namespace oom\api\frontend\controllers;
 
 
-use oom\api\response\JSONResult;
-use oom\api\models\APIAuthUser;
-use oom\api\models\forms\ApiAuthForm;
 use Yii;
 use yii\helpers\Json;
 use yii\web\IdentityInterface;
+use oom\api\components\response\JSONResult;
+use oom\api\models\APIAuthUser;
+use oom\api\models\forms\ApiAuthForm;
+use oom\api\frontend\services\AuthService;
 
-class SignController extends ApiController
+class AuthController extends BaseApiController
 {
 
     public $enableCsrfValidation = false;
@@ -25,6 +26,12 @@ class SignController extends ApiController
     /**
      * @return array|string
      */
+    public function actionIndex()
+    {
+        $authService = new AuthService();
+        return $authService->handleRequest(Yii::$app->request->post());
+    }
+
     public function actionToken()
     {
         $jsonResult = new JSONResult();
