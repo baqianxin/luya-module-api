@@ -6,7 +6,7 @@
  * Time: 10:44
  */
 
-namespace oom\components\utils;
+namespace oom\api\components\utils;
 
 use oom\api\models\APIAuthUser;
 use yii\filters\auth\AuthMethod;

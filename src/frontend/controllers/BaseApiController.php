@@ -12,7 +12,7 @@ use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\Response;
-use oom\components\utils\ApiParamAuth;
+use oom\api\components\utils\ApiParamAuth;
 
 class BaseApiController extends Controller
 {
