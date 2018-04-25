@@ -23,6 +23,7 @@ class m180416_065756_admin_user_api_auth extends Migration
         if ($this->db->schema->getTableSchema($this->userTable, true) === null) {
             $this->createTable($this->userTable, [
                 'id' => $this->primaryKey(),
+                'admin_id' => $this->integer()->unique()->notNull(),
                 'app_key' => $this->string(32)->notNull(),
                 'api_token' => $this->string()->notNull(),
                 'app_secret' => $this->string()->notNull(),
@@ -43,7 +44,7 @@ class m180416_065756_admin_user_api_auth extends Migration
                 参数7：更新选项，可选，默认为空。可选的类型有 RESTRICT, CASCADE, NO ACTION, SET DEFAULT, SET NULL。
                 注意：参数3和参数5的字段类型必须一致，否则执行失败。
              */
-            $this->addForeignKey('id_admin',$this->userTable,'id','admin_user','id');
+            $this->addForeignKey('admin_id_f_key',$this->userTable,'admin_id','admin_user','id');
         }
     }
     public function down()
