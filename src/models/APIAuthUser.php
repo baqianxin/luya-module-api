@@ -2,6 +2,7 @@
 
 namespace oom\api\models;
 
+use luya\admin\models\ApiUser;
 use oom\api\admin\aws\ChangeSecretActiveWindow;
 use luya\admin\ngrest\base\NgRestModel;
 use Yii;
@@ -15,6 +16,7 @@ use yii\web\IdentityInterface;
  * File has been created with `crud/create` command.
  *
  * @property integer $id
+ * @property integer $admin_id
  * @property string $email
  * @property string $username
  * @property string $app_key
@@ -42,7 +44,7 @@ class APIAuthUser extends NgRestModel implements IdentityInterface, RateLimitInt
      */
     public static function tableName()
     {
-        return 'api_auth_user';
+        return 'admin_user_api_auth';
     }
 
     /**
@@ -60,6 +62,7 @@ class APIAuthUser extends NgRestModel implements IdentityInterface, RateLimitInt
     {
         return [
             'id' => Yii::t('apiadmin', 'ID'),
+            'admin_id' => Yii::t('apiadmin', 'Admin User'),
             'email' => Yii::t('apiadmin', 'Email'),
             'username' => Yii::t('apiadmin', 'Username'),
             'app_key' => Yii::t('apiadmin', 'App Key'),
@@ -80,7 +83,7 @@ class APIAuthUser extends NgRestModel implements IdentityInterface, RateLimitInt
     public function rules()
     {
         return [
-            [['email', 'username', 'app_key', 'api_token', 'app_secret', 'created_at', 'updated_at'], 'required'],
+            [['email', 'admin_id','username', 'app_key', 'api_token', 'app_secret', 'created_at', 'updated_at'], 'required'],
             [['allowance', 'allowance_updated_at', 'status', 'created_at', 'updated_at'], 'integer'],
             [['email', 'api_token', 'app_secret', 'app_secret_reset_token'], 'string', 'max' => 255],
             [['username', 'app_key'], 'string', 'max' => 32],
@@ -101,6 +104,12 @@ class APIAuthUser extends NgRestModel implements IdentityInterface, RateLimitInt
     public function ngRestAttributeTypes()
     {
         return [
+            'admin_id' =>[
+                'selectModel',
+                'model'=>ApiUser::className(),
+                'valueField'=>'id',
+                'labelField'=>'email'
+            ],
             'email' => 'text',
             'username' => 'text',
             'app_key' => 'text',
@@ -124,8 +133,7 @@ class APIAuthUser extends NgRestModel implements IdentityInterface, RateLimitInt
             [
                 'list',
                 [
-                    'email',
-                    'username',
+                    'admin_id',
                     'app_key',
                     'allowance',
                     'updated_at'
@@ -134,8 +142,7 @@ class APIAuthUser extends NgRestModel implements IdentityInterface, RateLimitInt
             [
                 ['create', 'update'],
                 [
-                    'email',
-                    'username',
+                    'admin_id',
                     'allowance',
                     'allowance_updated_at',
                     'status',

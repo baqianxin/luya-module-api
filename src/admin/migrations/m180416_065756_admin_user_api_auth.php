@@ -24,6 +24,8 @@ class m180416_065756_admin_user_api_auth extends Migration
             $this->createTable($this->userTable, [
                 'id' => $this->primaryKey(),
                 'admin_id' => $this->integer()->unique()->notNull(),
+                'email' => $this->string()->notNull(),
+                'username' => $this->string(32)->notNull(),
                 'app_key' => $this->string(32)->notNull(),
                 'api_token' => $this->string()->notNull(),
                 'app_secret' => $this->string()->notNull(),
