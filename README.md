@@ -1,9 +1,15 @@
 # Api Module 
 [![Build Status](https://travis-ci.org/baqianxin/luya-module-api.svg?branch=master)](https://travis-ci.org/baqianxin/luya-module-api)
 
-File has been created with `module/create` command. 
+An oauth module for LUYA Api users.
  
 ## Installation
+
+Install the module trough composer
+
+```sh
+composer require oom/luya-module-apiauth:dev-master
+```
 
 In order to add the modules to your project go into the modules section of your config:
 
@@ -21,7 +27,8 @@ return [
 ];
 ```
 
-Update components
+Enable the user component with the built in ApiAuthUser class and add the REST Url rule:
+
 ```php
     'components' => [
 
@@ -41,14 +48,13 @@ Update components
     ]   
 ```
 
-## Example 
-* First: Insert the test user:`http://your.domain/api/sign/signup-test`
+## Example usage
 
-* Second:Request(post) the `http://your.domain/api/sign/token` with  params 'app_key'、'app_secret' to get the `'access token'`
+1. Insert the test user: `http://your.domain/api/sign/signup-test`
+2. Send a post request to `http://your.domain/api/sign/token` with `app_key` and `app_secret` data in order to get the access token.
+
 ![Step 2](./step-2.png)
 
-* Test Api: `http://your.domain/api/user/rules?token='access-token'`
-![Step 3](./step-3.png)
+3. Test Api with the created access token `http://your.domain/api/user/rules?token=ACCESS_TOKEN_FROM_TOKEN_REQUEST`
 
-# Usage
-* extend the ApiController
+![Step 3](./step-3.png)
