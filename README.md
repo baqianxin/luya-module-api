@@ -53,8 +53,8 @@ Enable the user component with the built in ApiAuthUser class and add the REST U
 1. Insert the test user: `http://your.domain/api/sign/signup-test`
 2. Send a post request to `http://your.domain/api/sign/token` with `app_key` and `app_secret` data in order to get the access token.
 
-![Step 2](./step-2.png)
+![Step 2](https://github.com/baqianxin/luya-module-api/raw/master/step-2.png)
 
 3. Test Api with the created access token `http://your.domain/api/user/rules?token=ACCESS_TOKEN_FROM_TOKEN_REQUEST`
 
-![Step 3](./step-3.png)
+![Step 3](https://github.com/baqianxin/luya-module-api/raw/master/step-3.png)
